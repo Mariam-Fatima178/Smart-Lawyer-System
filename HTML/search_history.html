@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="search-history-container">
+        <h1>Your Search History</h1>
+        {% if search_history %}
+            <ul class="history-list">
+                {% for search in search_history %}
+                    <li>{{ search[0] }}</li> <!-- Assuming the search query is in the first column -->
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have no search history.</p>
+        {% endif %}
+    </div>
+    <div class="footer">
+        <ul>
+            <li><a href="{{ url_for('index') }}">Back to Search</a></li>
+        </ul>
+    </div>
+</body>
+</html>

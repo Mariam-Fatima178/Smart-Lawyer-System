@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Search Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="search-container">
+        <h1>What Are You Looking For?</h1>
+        <form action="/search" method="POST">
+            <input type="text" name="query" placeholder="Enter your query">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    {% if query %}
+        <div class="results-container">
+            <h2>Results for "{{ query }}":</h2>
+            <ul class="results-list">
+                {% if cases %}
+                    <h2>Search Results for "{{ query }}"</h2>
+                    <ul>
+                        {% for case in cases %}
+                            <li>
+                                <h3>{{ case.title }}</h3>
+                                <p><strong>Type:</strong> {{ case.type }}</p>
+                                <p><strong>Facts:</strong> {{ case.facts }}</p>
+                                <p><strong>Court:</strong> {{ case.court }}</p>
+                                <a href="/case/{{ case.id }}">View Details</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% elif not_found %}
+                    <p>No results found for "{{ query }}". Please try again.</p>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+    <footer class="footer">
+        <ul>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            <li><a href="{{ url_for('search_history') }}">Search History</a></li>
+        </ul>
+        <div class="container">
+            <p>&copy; 2024 Smart Lawyer. All Rights Reserved.</p>
+        </div>
+    </footer>    
+</body>
+</html>
