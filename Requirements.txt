@@ -1,0 +1,9 @@
+Libraries your app needs:
+flask
+pandas
+scikit-learn
+nltk
+torch
+transformers
+flask-mysqldb
+bcrypt
